@@ -14,10 +14,11 @@
     ?>
 
         <h1><?php the_title(); // Displays the title of the current post as an h1 heading ?></h1>
+        <p><strong>Tech Stack:</strong> <?php echo get_post_meta(get_the_ID(), 'tech_stack', true); ?></p>
 
-        <div>
-            <?php the_content(); // Displays the full content of the current post ?>
-        </div>
+        <p><strong>Client:</strong> <?php echo get_post_meta(get_the_ID(), 'client_name', true); ?></p>
+        <p><a href="<?php echo get_post_meta(get_the_ID(), 'project_url', true); ?>" target="_blank">Visit Project</a></p>
+        <?php the_content(); // Displays the full content of the current post ?>
 
     <?php endwhile; ?>
 <?php endif; ?>

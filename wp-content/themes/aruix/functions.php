@@ -1,4 +1,37 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+if (!defined('ARUIX_PATH')) {
+    // ✅ DEFINE CONSTANTS FIRST
+    define('ARUIX_VERSION', '1.0.0');
+    define('ARUIX_PATH', get_template_directory());
+    define('ARUIX_URI', get_template_directory_uri());
+}
+
+require_once ARUIX_PATH . '/inc/plugins.php';
+
+// Show a front-end admin warning when the required ACF plugin is not active.
+function aruix_frontend_plugin_warning() {
+    // Only users with manage_options (administrators) see this message.
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    // If ACF is active, no warning is needed.
+    if (aruix_is_acf_active()) {
+        return;
+    }
+
+    // Print a visible red alert at the top of the page.
+    echo '<div style="background:red;color:#fff;padding:10px;text-align:center;">
+        ACF Plugin is NOT active. Theme may not work properly.
+    </div>';
+}
+
+// Hook the warning into wp_body_open so it appears within <body> before main content.
+add_action('wp_body_open', 'aruix_frontend_plugin_warning');
 
 // Register a function to enqueue theme styles/scripts when WordPress is loading assets
 function aruix_enqueue_assets() {
@@ -43,20 +76,20 @@ function aruix_register_menus() {
 // Hook menu registration function to 'after_setup_theme'. Ensures menus are available in admin.
 add_action('after_setup_theme', 'aruix_register_menus');
 
+// Register custom post types used by the theme.
 function aruix_register_post_types() {
-    // Register a custom post type called 'project' for portfolio items
+    // Register a custom post type called 'project' for portfolio items.
     register_post_type('project', array(
         'labels' => array(
-            'name' => 'Projects', // Plural name for admin menu
-            'singular_name' => 'Project', // Singular name for single items
+            'name' => 'Projects', // Label for the collection of items.
+            'singular_name' => 'Project', // Label for one item.
         ),
-        'public' => true, // Make post type visible in admin and frontend
-        'has_archive' => true, // Enable archive page for projects
-        'menu_icon' => 'dashicons-portfolio', // Icon in admin menu
-        'supports' => array('title', 'editor', 'thumbnail'), // Enabled features for posts
+        'public' => true, // Show on frontend and in admin.
+        'has_archive' => true, // Enable archive page for projects.
+        'menu_icon' => 'dashicons-portfolio', // Admin menu icon.
+        'supports' => array('title', 'editor', 'thumbnail'), // Supported post features.
     ));
-
 }
 
-// Hook post type registration to 'init'. Runs after WordPress has finished loading.
+// Run this code on init to register post types after WordPress has loaded.
 add_action('init', 'aruix_register_post_types');
