@@ -1,0 +1,22 @@
+.aruix-projects {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+
+    h3 {
+        color: #0073aa;
+        margin-bottom: 10px;
+    }
+    
+    &.list {
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
+
+    &.grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}

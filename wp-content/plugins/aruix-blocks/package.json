@@ -12,6 +12,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@wordpress/scripts": "^31.8.0"
+    "@wordpress/scripts": "^31.8.0",
+    "sass": "^1.99.0"
   }
 }
