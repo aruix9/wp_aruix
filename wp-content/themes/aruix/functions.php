@@ -75,21 +75,3 @@ function aruix_register_menus() {
 
 // Hook menu registration function to 'after_setup_theme'. Ensures menus are available in admin.
 add_action('after_setup_theme', 'aruix_register_menus');
-
-// Register custom post types used by the theme.
-function aruix_register_post_types() {
-    // Register a custom post type called 'project' for portfolio items.
-    register_post_type('project', array(
-        'labels' => array(
-            'name' => 'Projects', // Label for the collection of items.
-            'singular_name' => 'Project', // Label for one item.
-        ),
-        'public' => true, // Show on frontend and in admin.
-        'has_archive' => true, // Enable archive page for projects.
-        'menu_icon' => 'dashicons-portfolio', // Admin menu icon.
-        'supports' => array('title', 'editor', 'thumbnail'), // Supported post features.
-    ));
-}
-
-// Run this code on init to register post types after WordPress has loaded.
-add_action('init', 'aruix_register_post_types');

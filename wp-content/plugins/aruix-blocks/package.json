@@ -1,0 +1,17 @@
+{
+  "name": "aruix-blocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "block.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@wordpress/scripts": "^31.8.0"
+  }
+}
